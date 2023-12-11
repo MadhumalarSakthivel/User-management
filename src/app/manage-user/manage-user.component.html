@@ -1,0 +1,41 @@
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+ 
+    <ng-container *ngFor="let column of columnsToDisplay;" matColumnDef="{{column}}">
+    <th mat-header-cell *matHeaderCellDef>{{column}}</th>
+    <td mat-cell *matCellDef="let element">{{element[column]}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element;" [attr.colspan]="columnsToDisplay.length">
+      <div class="user-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <form [formGroup]="userDetail" class="user-detail-form form-font">
+            <div>
+                <label for="first-name" class="form-label">First Name: </label>
+                <input id="first-name" type="text" name="firstName" formControlName="firstName">
+            
+                <label for="last-name" class="form-label">Last Name: </label>
+                <input id="last-name" type="text" name="lastName" formControlName="lastName">
+
+                <label for="gender" class="form-label">Gender: </label>
+                <input id="gender" type="text" name="gender" formControlName="gender">
+            
+                <label for="email" class="form-label">Email: </label>
+                <input id="email" type="text" name="email" formControlName="email">
+            </div>
+            <div class="action-button">
+                <button type="button" [disabled]="!userDetail.valid && isLoading" (click)="updateUser()">
+                    <span><mat-spinner class="spinner" *ngIf="isLoading"></mat-spinner></span>
+                    <span *ngIf="!isLoading">Submit</span>
+                </button>
+                <button type="button" (click)="revertValue()">Cancel</button>
+            </div>
+          </form>
+      </div>
+    </td>
+  </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="user-element-row" 
+    [class.example-expanded-row]="expandedElement == element" (click)="expandRow(element)"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="user-detail-row"></tr>
+  </table>

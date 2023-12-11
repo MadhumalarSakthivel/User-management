@@ -1,0 +1,44 @@
+.user-detail {
+    overflow: hidden;
+    display: flex;
+  }
+
+  tr.user-detail-row {
+    height: 0;
+  }
+  
+  .user-element-row td {
+    border-bottom-width: 0;
+  }
+
+  .spinner {
+    width: 15px !important;
+    height:15px !important;
+    display: inline-flex !important;
+    padding-right: 15px;
+  }
+
+  .user-detail-form {
+    padding: 10px 20px;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .action-button {
+    padding:20px 10px;
+  }
+
+  .action-button button{
+    margin:0px 10px;
+  }
+
+  .form-font label, .form-font input {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
